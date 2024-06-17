@@ -1,0 +1,29 @@
+{
+  "name": "bureau-back-end",
+  "version": "0.0.0",
+  "description": "Backend do projeto Bureau Una Barreiro.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "test": "node --test test/",
+    "test:coverage": "node --experimental-test-coverage --test test/",
+    "test:debugger": "node --inspect --watch --test test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TecnoBureau/bureau-back-end.git"
+  },
+  "keywords": [
+    "bureau"
+  ],
+  "author": {
+    "name": "Gabriel-Paes",
+    "url": "https://gabrielpaes.com.br"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TecnoBureau/bureau-back-end/issues"
+  },
+  "homepage": "https://github.com/TecnoBureau/bureau-back-end#readme"
+}
