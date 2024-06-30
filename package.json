@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/TecnoBureau/bureau-back-end#readme",
   "dependencies": {
-    "env-var": "^7.5.0"
+    "env-var": "^7.5.0",
+    "mongoose": "^8.4.4"
   }
 }
