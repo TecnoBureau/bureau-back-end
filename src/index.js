@@ -6,13 +6,18 @@ import helmet from "helmet";
 import cors from "cors";
 import { Parser } from "json2csv";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerConfig from "./docs/swaggerConfig.js";
+
 const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.options("*", cors());
 
-app.get("/registrations", async (req, res) => {
+app.use("/v1/api/swagger/", swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+
+app.get("/v1/api/registrations", async (req, res) => {
   try {
     const registrations = await Registration.find();
     res.json({ registrations: registrations, count: registrations.length });
@@ -22,7 +27,7 @@ app.get("/registrations", async (req, res) => {
   }
 });
 
-app.get("/registrations/csv", async (req, res) => {
+app.get("/v1/api/registrations/csv", async (req, res) => {
   try {
     const registrations = await Registration.find().lean();
 
@@ -68,7 +73,7 @@ app.get("/registrations/csv", async (req, res) => {
   }
 });
 
-app.post("/registrations", async (req, res) => {
+app.post("/v1/api/registrations", async (req, res) => {
   try {
     const newRegistration = new Registration({
       ...req.body,
