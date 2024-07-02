@@ -96,7 +96,7 @@ app.post("/v1/api/registrations", async (req, res) => {
   }
 });
 
-const mongodbUri = `${config.mongodbUrl}${config.mongodbDatabase}`;
+const mongodbUri = `${config.mongodbUrl}${config.mongodbDatabase}?retryWrites=true&w=majority&ssl=true&authSource=admin`;
 const mongodbOptions = {
   autoCreate: true,
 };
