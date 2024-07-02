@@ -12,7 +12,12 @@ const swaggerConfig = {
   },
   servers: [
     {
+      url: "https://api-bureau.onrender.com/v1/api",
+      description: "Render server",
+    },
+    {
       url: `http://localhost:${config.port}/v1/api`,
+      description: "Local server",
     },
   ],
   paths: {
