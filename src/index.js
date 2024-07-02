@@ -4,8 +4,7 @@ import config from "./config/config.js";
 import Registration from "./models/registration.model.js";
 import helmet from "helmet";
 import cors from "cors";
-
-console.log(config);
+import { Parser } from "json2csv";
 
 const app = express();
 app.use(express.json());
@@ -17,6 +16,52 @@ app.get("/registrations", async (req, res) => {
   try {
     const registrations = await Registration.find();
     res.json({ registrations: registrations, count: registrations.length });
+  } catch (error) {
+    console.error("Erro ao listar inscrições:", error);
+    res.status(500).send("Erro ao processar a solicitação.");
+  }
+});
+
+app.get("/registrations/csv", async (req, res) => {
+  try {
+    const registrations = await Registration.find().lean();
+
+    const keysToFilter = {
+      _id: true,
+      __v: true,
+      updatedAt: true,
+    };
+
+    const fields = Object.keys(Registration.schema.paths).filter(
+      (field) => !keysToFilter[field]
+    );
+
+    const transformedRegistrations = registrations.map((registration) => {
+      const dateRegistration = new Date(registration.createdAt);
+      const dateOptions = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "America/Sao_Paulo",
+      };
+
+      return {
+        ...registration,
+        createdAt: dateRegistration.toLocaleDateString("pt-BR", dateOptions),
+      };
+    });
+
+    res.header("Content-Type", "text/csv");
+    res.attachment("registrations.csv");
+
+    const opts = { fields };
+
+    const parser = new Parser(opts);
+    const csv = parser.parse(transformedRegistrations);
+
+    res.send(csv);
   } catch (error) {
     console.error("Erro ao listar inscrições:", error);
     res.status(500).send("Erro ao processar a solicitação.");
@@ -53,11 +98,9 @@ const mongodbOptions = {
 
 let server;
 mongoose.connect(mongodbUri, mongodbOptions).then(() => {
-  console.log("Conectado ao MongoDB!");
+  console.log("Connected to MongoDB!");
   server = app.listen(config.port, () => {
-    console.log(
-      `Listening to port ${config.port}, http://localhost:${config.port}`
-    );
+    console.log(`Listening to port ${config.port}`);
   });
 });
 
