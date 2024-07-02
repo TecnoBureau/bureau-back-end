@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --env-file=.env src/index.js",
+    "start": "node src/index.js",
+    "build": "node src/index.js",
     "dev": "node --env-file=.env --watch src/index.js",
     "test": "node --env-file=.env --test test/",
     "test:coverage": "node --env-file=.env --experimental-test-coverage --test test/",
