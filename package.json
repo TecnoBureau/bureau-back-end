@@ -1,6 +1,6 @@
 {
   "name": "bureau-back-end",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Backend do projeto Bureau Una Barreiro.",
   "main": "index.js",
   "type": "module",
@@ -37,6 +37,7 @@
     "json2csv": "^6.0.0-alpha.2",
     "mongoose": "^8.4.4",
     "node-cron": "^4.2.0",
+    "supertest": "^7.1.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "validator": "^13.12.0"

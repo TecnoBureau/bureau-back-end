@@ -295,6 +295,27 @@ const swaggerConfig = {
         },
       },
     },
+    "/health": {
+      get: {
+        summary: "Verifica o status de saúde da API",
+        responses: {
+          200: {
+            description: "Status da API retornado com sucesso",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    status: { type: "string", example: "ok" },
+                    time: { type: "string", format: "date-time", example: "2024-07-01T10:30:00.000Z" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
   },
 };
 

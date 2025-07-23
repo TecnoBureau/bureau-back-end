@@ -5,6 +5,7 @@ const config = {
   port: env.get("PORT").required().asPortNumber(),
   mongodbUrl: env.get("MONGODB_URL").required().asUrlString(),
   mongodbDatabase: env.get("MONGODB_DATABASE").required().asString(),
+  corsOrigin: env.get("CORS_ORIGIN").required().asUrlString(),
 }; */
 
 const config = {
@@ -12,6 +13,7 @@ const config = {
   port: process.env.PORT,
   mongodbUrl: process.env.MONGODB_URL,
   mongodbDatabase: process.env.MONGODB_DATABASE,
+  corsOrigin: process.env.CORS_ORIGIN,
 };
 
 export default config;
